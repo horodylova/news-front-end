@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../contexts/User";
+import { UserContext } from "../../contexts/User.jsx";
 import { Link } from "react-router-dom";
 import toggle from '../../utils/toggle.js';
 
