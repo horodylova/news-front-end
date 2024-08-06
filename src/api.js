@@ -12,3 +12,13 @@ const api = axios.create({
         throw new Error(`Error fetching articles: ${error.response?.data?.message || error.message}`);
       });
   };
+
+  export const fetchSingleArticle = (article_id) => {
+    return api 
+    .get('/articles/:article_id')
+    .then(({data}) => data)
+    .catch((error) => {
+        throw new Error(`Error fetching articles: ${error.response?.data?.message || error.message}`);
+
+    })
+  }
