@@ -21,3 +21,13 @@ const api = axios.create({
         throw new Error(`Error fetching article: ${error.response?.data?.message || error.message}`);
       });
   };
+
+  export const fetchComments = (article_id) => {
+    return api
+      .get(`/articles/${article_id}/comments`)
+      .then(({ data }) => data) 
+      .catch((error) => {
+        throw new Error(`Error fetching comments: ${error.response?.data?.message || error.message}`);
+      });
+  };
+  
