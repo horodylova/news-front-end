@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Card = styled(Link)`
+export const Card = styled.div`
   display: block;
   padding: 16px;
   margin: 16px 0;

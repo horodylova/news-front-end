@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   Title,
@@ -21,15 +22,17 @@ function ArticleCard({
   comment_count,
 }) {
   return (
-    <Card to={`/articles/${article_id}`}>
+    <Link to={`/articles/${article_id}`}>
+    <Card>
       <Title>{title}</Title>
       <Author>{author}</Author>
-      <CreatedAt>{new Date(created_at).toLocaleDateString()}</CreatedAt>
+      <Date>{new Date(created_at).toLocaleDateString()}</Date>
       <Image src={article_img_url} alt={`Image for ${title}`} />
       <Topic>{topic}</Topic>
       <Votes>Votes: {votes}</Votes>
       <CommentCount>Comments: {comment_count}</CommentCount>
     </Card>
+  </Link>
   );
 }
 

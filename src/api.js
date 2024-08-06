@@ -14,11 +14,10 @@ const api = axios.create({
   };
 
   export const fetchSingleArticle = (article_id) => {
-    return api 
-    .get(`/articles/${article_id}`)
-    .then(({data}) => data)
-    .catch((error) => {
-        throw new Error(`Error fetching articles: ${error.response?.data?.message || error.message}`);
-
-    })
-  }
+    return api
+      .get(`/articles/${article_id}`)
+      .then(({ data }) => data)
+      .catch((error) => {
+        throw new Error(`Error fetching article: ${error.response?.data?.message || error.message}`);
+      });
+  };
