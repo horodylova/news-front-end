@@ -1,11 +1,36 @@
-import React from 'react'
-import { fetchArticles } from '../../api'
+import React, { useEffect, useState } from 'react';
+import { fetchArticles } from '../../api';  
 
-function ArticlesList() {
-  
+function ArticlesPage() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchArticles()
+      .then(data => {
+        setArticles(data.articles);  
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
-    <div>ArticlesList</div>
-  )
+    <div>
+      <h1>Articles</h1>
+      <ul>
+        {articles.map(article => (
+          <li key={article.id}>{article.title}</li>  
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default ArticlesList
+export default ArticlesPage;

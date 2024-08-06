@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/User.jsx";
 import { Link } from "react-router-dom";
-import toggle from '../../utils/toggle.js';
+import { toggle } from '../../utils/toggle.js';
 
 import {
   HeaderContainer,
@@ -20,7 +20,7 @@ function Header() {
     <HeaderContainer>
       <Heading>Summer News</Heading>
       <ButtonContainer>
-        <RegisterButton to="/registration" onClick={toggle} >Join Us!</RegisterButton>
+        <RegisterButton to="/registration" id='reg-button' onClick={toggle}>Join Us!</RegisterButton>
       </ButtonContainer>
       <NavContainer>
         <NavList>
