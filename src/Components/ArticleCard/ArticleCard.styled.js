@@ -1,59 +1,64 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
 
 export const Card = styled.div`
-  display: block;
-  padding: 16px;
-  margin: 16px 0;
+  display: flex;
   border: 1px solid #ddd;
   border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow 0.3s ease;
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  overflow: hidden;
+  width: 900px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 `;
 
-export const Title = styled.h2`
-  margin: 0 0 8px 0;
-  font-size: 24px;
-  color: #333;
-`;
-
-export const Author = styled.h3`
-  margin: 0 0 8px 0;
-  font-size: 18px;
-  color: #666;
-`;
-
-export const CreatedAt = styled.p`
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #999;
-`;
-
+export const ContentContainer = styled.div `
+display:flex;
+flex-direction:column`
 export const Image = styled.img`
-  width: 100%;
-  height: auto;
-  margin-bottom: 16px;
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
   border-radius: 4px;
+  margin-right: 10px;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%; 
+`;
+
+export const Title = styled.h3`
+  font-size: 16px;
+  margin: 0 0 8px;
+`;
+
+export const Author = styled.p`
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 4px;
+`;
+
+export const DateStyled = styled.p`
+  font-size: 12px;
+  color: #777;
+  margin: 0 0 8px;
 `;
 
 export const Topic = styled.p`
-  margin: 0 0 8px 0;
-  font-size: 16px;
-  color: #007BFF;
+  font-size: 14px;
+  margin: 0 0 8px;
+  font-weight: bold;
 `;
 
 export const Votes = styled.p`
-  margin: 0 0 8px 0;
   font-size: 14px;
-  color: #333;
+  margin: 0 0 4px;
 `;
 
 export const CommentCount = styled.p`
-  margin: 0 0 8px 0;
   font-size: 14px;
-  color: #333;
+  margin: 0;
 `;
