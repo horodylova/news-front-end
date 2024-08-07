@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { fetchComments } from '../../api';
+import { AppContext } from '../../contexts/AppContext';
+import Loader from '../Loader/Loader';
+
 import {
   CommentsContainer,
   CommentItem,
@@ -10,10 +15,10 @@ import {
 
 function CommentsList({ article_id }) {
   const [commentsList, setCommentsList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {loading, setLoading, error, setError} = useContext(AppContext)
 
   useEffect(() => {
+    setLoading(true);
     fetchComments(article_id)
       .then(data => {
         setCommentsList(data.comments);
@@ -22,11 +27,12 @@ function CommentsList({ article_id }) {
       .catch(err => {
         setError(err);
         setLoading(false);
+        toast.error(`Error: ${err.message}`);
       });
   }, [article_id]);
 
-  if (loading) return <div>Loading comments...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <Loader/>;
+  if (error) return null; 
 
   return (
     <CommentsContainer>

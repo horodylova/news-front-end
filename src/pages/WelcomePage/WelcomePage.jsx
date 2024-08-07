@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageContainer, Heading, Article } from './WelcomePage.styled';
+import Loader from '../../Components/Loader/Loader'
 
 function WelcomePage() {
   return (

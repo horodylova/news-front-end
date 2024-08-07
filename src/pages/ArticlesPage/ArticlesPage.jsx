@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AppContext } from '../../contexts/AppContext';
 import { fetchArticles } from '../../api'; 
 import ArticleCard from '../../Components/ArticleCard/ArticleCard';
+import Loader from '../../Components/Loader/Loader'
 
 function ArticlesPage() {
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+ const {loading, setLoading, error, setError} = useContext(AppContext)
 
   useEffect(() => {
+    setLoading(true);
     fetchArticles()
       .then(data => {
         setArticles(data.articles);  
@@ -16,11 +20,12 @@ function ArticlesPage() {
       .catch(err => {
         setError(err);
         setLoading(false);
+        toast.error(`Error: ${err.message}`);
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <Loader/>;
+  if (error) return null;
 
   return (
     <div>

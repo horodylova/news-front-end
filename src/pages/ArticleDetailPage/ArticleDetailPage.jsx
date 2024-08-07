@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import { fetchSingleArticle } from '../../api';
+import { AppContext } from '../../contexts/AppContext';
 import CommentsList from '../../Components/CommentsList/CommentsList'; 
+import RecomendIcon from '../../public/icons/recommended-like.svg';
+import Loader from '../../Components/Loader/Loader';
 import {
   ArticleContainer,
   Title,
@@ -16,9 +21,8 @@ import {
 
 function ArticleDetailPage() {
   const { article_id } = useParams();
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { loading, setLoading, error, setError } = useContext(AppContext);
+  const [article, setArticle] = useState(null); 
 
   useEffect(() => {
     fetchSingleArticle(article_id)
@@ -29,12 +33,16 @@ function ArticleDetailPage() {
       .catch(err => {
         setError(err);
         setLoading(false);
+        toast.error(`Error: ${err.message}`);
       });
   }, [article_id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!article) return <div>No article found</div>;
+  if (loading) return <Loader />;
+  if (error) return null; 
+  if (!article) {
+    toast.error('No article found');
+    return null;
+  } 
 
   return (
     <>
@@ -46,6 +54,7 @@ function ArticleDetailPage() {
         <Topic>{article.topic}</Topic>
         <Body>{article.body}</Body>
         <Votes>Votes: {article.votes}</Votes>
+        <img src={RecomendIcon} alt="recomend icon" />
         <CommentCount>Comments: {article.comment_count}</CommentCount>
       </ArticleContainer>
       <CommentsList article_id={article.article_id} />
@@ -54,4 +63,5 @@ function ArticleDetailPage() {
 }
 
 export default ArticleDetailPage;
+
 

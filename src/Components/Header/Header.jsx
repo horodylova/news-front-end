@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../contexts/User.jsx";
+import { AppContext } from "../../contexts/AppContext.jsx";
 import { Link } from "react-router-dom";
 import { toggle } from '../../utils/toggle.js';
 
@@ -14,7 +14,7 @@ import {
 } from "./Header.styled";
 
 function Header() {
-  const user = useContext(UserContext);
+  const {user, setUser} = useContext(AppContext);
 
   return (
     <HeaderContainer>
