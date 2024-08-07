@@ -30,4 +30,8 @@ const api = axios.create({
         throw new Error(`Error fetching comments: ${error.response?.data?.message || error.message}`);
       });
   };
-  
+
+  export const patchArticleByVote = async (article_id, inc_votes) => {
+    const response = await api.patch(`/articles/${article_id}`, { inc_votes });
+    return response.data;
+  };

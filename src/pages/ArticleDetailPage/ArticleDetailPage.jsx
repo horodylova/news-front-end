@@ -5,8 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { fetchSingleArticle } from '../../api';
 import { AppContext } from '../../contexts/AppContext';
 import CommentsList from '../../Components/CommentsList/CommentsList'; 
-import RecomendIcon from '../../public/icons/recommended-like.svg';
 import Loader from '../../Components/Loader/Loader';
+import VotesSection from '../../Components/VotesSection/VotesSection';
 import {
   ArticleContainer,
   Title,
@@ -15,7 +15,6 @@ import {
   Image,
   Topic,
   Body,
-  Votes,
   CommentCount,
 } from './ArticleDetailPage.styled';
 
@@ -25,20 +24,24 @@ function ArticleDetailPage() {
   const [article, setArticle] = useState(null); 
 
   useEffect(() => {
-    fetchSingleArticle(article_id)
-      .then(data => {
+    const fetchArticle = async () => {
+      try {
+        
+        const data = await fetchSingleArticle(article_id);
         setArticle(data.article);
         setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
+      } catch (error) {
+        setError(error);
         setLoading(false);
-        toast.error(`Error: ${err.message}`);
-      });
-  }, [article_id]);
+        toast.error(`Error: ${error.message}`);
+      }
+    };
+
+    fetchArticle();
+  }, [article_id, setLoading, setError]);
 
   if (loading) return <Loader />;
-  if (error) return null; 
+  if (error) return null;
   if (!article) {
     toast.error('No article found');
     return null;
@@ -53,8 +56,7 @@ function ArticleDetailPage() {
         <Image src={article.article_img_url} alt={`Image for ${article.title}`} />
         <Topic>{article.topic}</Topic>
         <Body>{article.body}</Body>
-        <Votes>Votes: {article.votes}</Votes>
-        <img src={RecomendIcon} alt="recomend icon" />
+        <VotesSection article_id={article.article_id} votes={article.votes} />
         <CommentCount>Comments: {article.comment_count}</CommentCount>
       </ArticleContainer>
       <CommentsList article_id={article.article_id} />
@@ -63,5 +65,6 @@ function ArticleDetailPage() {
 }
 
 export default ArticleDetailPage;
+
 
 

@@ -18,8 +18,7 @@ function CommentsList({ article_id }) {
   const {loading, setLoading, error, setError} = useContext(AppContext)
 
   useEffect(() => {
-    setLoading(true);
-    fetchComments(article_id)
+     fetchComments(article_id)
       .then(data => {
         setCommentsList(data.comments);
         setLoading(false);
