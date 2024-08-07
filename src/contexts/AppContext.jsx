@@ -10,9 +10,10 @@ const AppProvider = ({children}) => {
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isLogin, setIsLogin] = useState(false)
 
     return (
-        <AppContext.Provider value={{user, setUser, setLoading, error, loading, setError}}>
+        <AppContext.Provider value={{user, setUser, setLoading, error, loading, setError, isLogin, setIsLogin}}>
             {children}
         </AppContext.Provider>
     );

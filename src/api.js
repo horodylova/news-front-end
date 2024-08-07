@@ -35,3 +35,13 @@ const api = axios.create({
     const response = await api.patch(`/articles/${article_id}`, { inc_votes });
     return response.data;
   };
+
+  export const fetchUserById = (username) => {
+    return api.get(`/users/${username}`).then(({ data }) => {
+       return data;
+    });
+ };
+ 
+ 
+
+ 

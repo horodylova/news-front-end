@@ -25,8 +25,8 @@ function Header() {
       <Heading>Summer News</Heading>
       <ButtonContainer>
         {isButtonVisible && (
-          <RegisterButton to="/registration" onClick={toggleButtonVisibility}>
-            Join Us!
+          <RegisterButton to="/login" onClick={toggleButtonVisibility}>
+            Log In
           </RegisterButton>
         )}
       </ButtonContainer>
