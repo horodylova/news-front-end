@@ -1,52 +1,51 @@
-import React, { useContext } from "react";
-import { fetchUserById } from '../../api'
+import React, { useContext, useState } from "react";
+import { toast } from 'react-toastify';
+import { fetchUserById } from '../../api';
 import { AppContext } from "../../contexts/AppContext";
-import {
-  FormContainer,
-  Form,
-  Label,
-  Input,
-  Button,
-} from "./LoginPage.styled";  
+import { FormContainer, Form, Label, Input, Button } from "./LoginPage.styled";
 
 function LoginPage() {
-  const {user, setUser, isLogin, setIsLogin} = useContext(AppContext)
-  
+  const { user, setUser, isLogin, setIsLogin } = useContext(AppContext);
+  const [inputValues, setInputValues] = useState({
+    name: user.name,
+    username: user.username,
+  });
 
-  async function handleSubmit (event) {
-    event.preventDefault()
-    try{
-      const response = await fetchUserById()
-      const users = response.users
-      const existingUser = users.find(
-        (uniqueUser) => uniqueUser.username === username
-     );
-     if (existingUser) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const response = await fetchUserById(inputValues.username);
+      const fetchedUser = response.user;
+      setUser(fetchedUser);
       setIsLogin(true);
-    }
-    
+      toast.success('Login successful!');
     } catch (error) {
-    console.log("Error submitting user: ", error);
-    setIsLogin(false);
+      console.log("Error submitting user: ", error);
+      setIsLogin(false);
+      toast.error(`Error: ${error.message}`);
     }
-    }
-     
-    function handleChange(event) {
-      setUser(event.target.value);
-    }
-    
+  }
+
+  function handleChange(event) {
+    const { id, value } = event.target;
+    setInputValues(prevValues => ({
+      ...prevValues,
+      [id]: value,
+    }));
+  }
+
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
           Name
-          <Input type="text" id="name" placeholder="Svitlana Horodylova" onChange={handleChange} value={user.name}/>
+          <Input type="text" id="name" placeholder="Svitlana Horodylova" onChange={handleChange} value={inputValues.name} />
         </Label>
         <Label htmlFor="username">
           Username
-          <Input type="text" id="username" placeholder="asvetkin" onChange={handleChange} value={user.username}/>
+          <Input type="text" id="username" placeholder="asvetkin" onChange={handleChange} value={inputValues.username} />
         </Label>
-        <Button type="submit">Join</Button>
+        <Button type="submit">Log In</Button>
       </Form>
     </FormContainer>
   );

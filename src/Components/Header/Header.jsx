@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../contexts/AppContext.jsx";
 import { Link } from "react-router-dom";
 
@@ -13,12 +13,16 @@ import {
 } from "./Header.styled";
 
 function Header() {
-  const {user, setUser} = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const toggleButtonVisibility = () => {
     setIsButtonVisible(!isButtonVisible);
   };
+
+  useEffect(() => {
+    console.log("User updated: ", user);
+  }, [user]);
 
   return (
     <HeaderContainer>
