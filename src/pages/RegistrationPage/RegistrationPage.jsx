@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 // const onSubmit = async ({ }) => {
 //   try {
 //     await ;
-//     toast.success('Login successful. Welcome aboard!');
+//     toast.success('Welcome aboard!');
 //     reset();
 //   } catch (error) {
 //     toast.error(error);

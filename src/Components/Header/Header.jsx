@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../contexts/AppContext.jsx";
 import { Link } from "react-router-dom";
-import { toggle } from '../../utils/toggle.js';
 
 import {
   HeaderContainer,
@@ -15,12 +14,21 @@ import {
 
 function Header() {
   const {user, setUser} = useContext(AppContext);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
+
+  const toggleButtonVisibility = () => {
+    setIsButtonVisible(!isButtonVisible);
+  };
 
   return (
     <HeaderContainer>
       <Heading>Summer News</Heading>
       <ButtonContainer>
-        <RegisterButton to="/registration" id='reg-button' onClick={toggle}>Join Us!</RegisterButton>
+        {isButtonVisible && (
+          <RegisterButton to="/registration" onClick={toggleButtonVisibility}>
+            Join Us!
+          </RegisterButton>
+        )}
       </ButtonContainer>
       <NavContainer>
         <NavList>
