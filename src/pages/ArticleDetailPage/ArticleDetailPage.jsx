@@ -24,10 +24,11 @@ function ArticleDetailPage() {
   const { loading, setLoading, error, setError, isLogin, user } = useContext(AppContext);
   const [article, setArticle] = useState(null); 
 
+  console.log(user.username, 'on the page');
+
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        
         const data = await fetchSingleArticle(article_id);
         setArticle(data.article);
         setLoading(false);
@@ -67,6 +68,7 @@ function ArticleDetailPage() {
 }
 
 export default ArticleDetailPage;
+
 
 
 

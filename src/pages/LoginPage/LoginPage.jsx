@@ -6,9 +6,10 @@ import { FormContainer, Form, Label, Input, Button } from "./LoginPage.styled";
 
 function LoginPage() {
   const { user, setUser, isLogin, setIsLogin } = useContext(AppContext);
+
   const [inputValues, setInputValues] = useState({
-    name: user.name,
-    username: user.username,
+    name: user ? user.name : '',
+    username: user ? user.username : '',
   });
 
   async function handleSubmit(event) {
@@ -32,6 +33,7 @@ function LoginPage() {
       ...prevValues,
       [id]: value,
     }));
+    setUser(event.target.value)
   }
 
   return (
@@ -39,11 +41,23 @@ function LoginPage() {
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
           Name
-          <Input type="text" id="name" placeholder="Svitlana Horodylova" onChange={handleChange} value={inputValues.name} />
+          <Input
+            type="text"
+            id="name"
+            placeholder="Svitlana Horodylova"
+            onChange={handleChange}
+            value={inputValues.name}
+          />
         </Label>
         <Label htmlFor="username">
           Username
-          <Input type="text" id="username" placeholder="asvetkin" onChange={handleChange} value={inputValues.username} />
+          <Input
+            type="text"
+            id="username"
+            placeholder="asvetkin"
+            onChange={handleChange}
+            value={inputValues.username}
+          />
         </Label>
         <Button type="submit">Log In</Button>
       </Form>
@@ -52,3 +66,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+

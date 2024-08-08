@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AppContext } from "../../contexts/AppContext.jsx";
+import { AppContext } from "../../contexts/AppContext";
 import { Link } from "react-router-dom";
 
 import {
@@ -13,23 +13,14 @@ import {
 } from "./Header.styled";
 
 function Header() {
-  const { user, setUser } = useContext(AppContext);
-  const [isButtonVisible, setIsButtonVisible] = useState(true);
-
-  const toggleButtonVisibility = () => {
-    setIsButtonVisible(!isButtonVisible);
-  };
-
-  useEffect(() => {
-    console.log("User updated: ", user);
-  }, [user]);
+  const { user, isLogin } = useContext(AppContext);
 
   return (
     <HeaderContainer>
       <Heading>Summer News</Heading>
       <ButtonContainer>
-        {isButtonVisible && (
-          <RegisterButton to="/login" onClick={toggleButtonVisibility}>
+        {!isLogin && (
+          <RegisterButton to="/login">
             Log In
           </RegisterButton>
         )}
@@ -44,9 +35,10 @@ function Header() {
           </li>
         </NavList>
       </NavContainer>
-      <WelcomeMessage>Welcome, {user.username}!</WelcomeMessage>
+      {isLogin && <WelcomeMessage>Welcome {user?.username}</WelcomeMessage>}
     </HeaderContainer>
   );
 }
 
 export default Header;
+

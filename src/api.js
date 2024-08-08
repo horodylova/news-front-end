@@ -44,12 +44,17 @@ const api = axios.create({
  
  export const postNewComment = (article_id, username, newComment) => {
   const comment = {
-    author: username, 
-    body: newComment
-  }
-return api 
-.post(`articles/${article_id}/comments`, comment)
-.then(({data}) => data)
- }
+      author: username,
+      body: newComment
+  };
 
+  return axios
+      .post(`https://news-api-1-jrxe.onrender.com/api/articles/${article_id}/comments`, comment)
+      .then(({ data }) => data)
+      .catch(error => {
+        console.log(comment.author);
+          throw new Error(`Failed to post comment: ${error.message}`);
+         
+      });
+};
  
