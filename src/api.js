@@ -42,6 +42,14 @@ const api = axios.create({
     });
  };
  
- 
+ export const postNewComment = (article_id, username, newComment) => {
+  const comment = {
+    author: username, 
+    body: newComment
+  }
+return api 
+.post(`articles/${article_id}/comments, comment`)
+.then(({data}) => data)
+ }
 
  
