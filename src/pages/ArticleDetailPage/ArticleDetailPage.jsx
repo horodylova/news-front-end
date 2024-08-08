@@ -7,6 +7,7 @@ import { AppContext } from '../../contexts/AppContext';
 import CommentsList from '../../Components/CommentsList/CommentsList'; 
 import Loader from '../../Components/Loader/Loader';
 import VotesSection from '../../Components/VotesSection/VotesSection';
+import AddComment from '../../Components/AddComment/AddComment'
 import {
   ArticleContainer,
   Title,
@@ -20,13 +21,13 @@ import {
 
 function ArticleDetailPage() {
   const { article_id } = useParams();
-  const { loading, setLoading, error, setError } = useContext(AppContext);
+  const { loading, setLoading, error, setError, isLogin, user } = useContext(AppContext);
   const [article, setArticle] = useState(null); 
+
 
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        
         const data = await fetchSingleArticle(article_id);
         setArticle(data.article);
         setLoading(false);
@@ -59,12 +60,14 @@ function ArticleDetailPage() {
         <VotesSection article_id={article.article_id} votes={article.votes} />
         <CommentCount>Comments: {article.comment_count}</CommentCount>
       </ArticleContainer>
+      {isLogin ? <AddComment article_id={article.article_id} username={user.username} /> : null}
       <CommentsList article_id={article.article_id} />
     </>
   );
 }
 
 export default ArticleDetailPage;
+
 
 
 

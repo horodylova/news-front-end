@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../contexts/AppContext.jsx";
+import { AppContext } from "../../contexts/AppContext";
 import { Link } from "react-router-dom";
-import { toggle } from '../../utils/toggle.js';
 
 import {
   HeaderContainer,
@@ -14,13 +13,17 @@ import {
 } from "./Header.styled";
 
 function Header() {
-  const {user, setUser} = useContext(AppContext);
+  const { user, isLogin } = useContext(AppContext);
 
   return (
     <HeaderContainer>
       <Heading>Summer News</Heading>
       <ButtonContainer>
-        <RegisterButton to="/registration" id='reg-button' onClick={toggle}>Join Us!</RegisterButton>
+        {!isLogin && (
+          <RegisterButton to="/login">
+            Log In
+          </RegisterButton>
+        )}
       </ButtonContainer>
       <NavContainer>
         <NavList>
@@ -32,9 +35,10 @@ function Header() {
           </li>
         </NavList>
       </NavContainer>
-      <WelcomeMessage>Welcome, {user.username}!</WelcomeMessage>
+      {isLogin && <WelcomeMessage>Welcome {user?.username}</WelcomeMessage>}
     </HeaderContainer>
   );
 }
 
 export default Header;
+

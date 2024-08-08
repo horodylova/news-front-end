@@ -35,3 +35,26 @@ const api = axios.create({
     const response = await api.patch(`/articles/${article_id}`, { inc_votes });
     return response.data;
   };
+
+  export const fetchUserById = (username) => {
+    return api.get(`/users/${username}`).then(({ data }) => {
+       return data;
+    });
+ };
+ 
+ export const postNewComment = (article_id, username, newComment) => {
+  const comment = {
+      author: username,
+      body: newComment
+  };
+
+  return axios
+      .post(`https://news-api-1-jrxe.onrender.com/api/articles/${article_id}/comments`, comment)
+      .then(({ data }) => data)
+      .catch(error => {
+        console.log(comment.author);
+          throw new Error(`Failed to post comment: ${error.message}`);
+         
+      });
+};
+ 
