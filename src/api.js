@@ -48,7 +48,7 @@ const api = axios.create({
     body: newComment
   }
 return api 
-.post(`articles/${article_id}/comments, comment`)
+.post(`articles/${article_id}/comments`, comment)
 .then(({data}) => data)
  }
 
