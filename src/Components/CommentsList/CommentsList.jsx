@@ -27,7 +27,7 @@ function CommentsList({ article_id }) {
         setLoading(false);
         toast.error(`Error: ${err.message}`);
       });
-  }, [article_id]);
+  }, [article_id, commentsList]);
 
   if (loading) return <Loader/>;
   if (error) return null; 

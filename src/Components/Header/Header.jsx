@@ -15,9 +15,6 @@ import {
 function Header() {
   const { user, isLogin } = useContext(AppContext);
 
-  console.log(user, 'in header');
-  console.log(isLogin);
-
   return (
     <HeaderContainer>
       <Heading>Summer News</Heading>

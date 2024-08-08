@@ -1,6 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { postNewComment } from '../../api';
 import { AppContext } from '../../contexts/AppContext';
+import {
+  AddCommentForm,
+  CommentInput,
+  AddButton,
+} from './AddComment.styled';
 
 function AddComment({ article_id, username }) {
     const { commentsList, setCommentsList } = useContext(AppContext);
@@ -10,14 +15,15 @@ function AddComment({ article_id, username }) {
         event.preventDefault();
         postNewComment(article_id, username, newComment)
         .then((addedComment) =>  {
+            console.log('Added comment:', addedComment);
             setCommentsList((currentList) => {
-                return [...currentList, addedComment];  
+                return [...currentList, addedComment.comment];  
             });
             setNewComment(''); 
         })
-            .catch(error => {
-                console.error('Error adding comment:', error.message);
-            });
+        .catch(error => {
+            console.error('Error adding comment:', error.message);
+        });
     }
 
     function handleChange(event) {
@@ -25,19 +31,20 @@ function AddComment({ article_id, username }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <AddCommentForm onSubmit={handleSubmit}>
             <label htmlFor="comment">Add your comment:</label>
-            <input
+            <CommentInput
                 type="text"
                 value={newComment}
                 onChange={handleChange}  
                 id="comment"
             />
-            <button type="submit">Add</button>
-        </form>
+            <AddButton type="submit">Add</AddButton>
+        </AddCommentForm>
     );
 }
 
 export default AddComment;
+
 
 
