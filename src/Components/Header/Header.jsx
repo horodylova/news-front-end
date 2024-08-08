@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import { Link } from "react-router-dom";
 
@@ -14,6 +14,9 @@ import {
 
 function Header() {
   const { user, isLogin } = useContext(AppContext);
+
+  console.log(user, 'in header');
+  console.log(isLogin);
 
   return (
     <HeaderContainer>

@@ -14,8 +14,7 @@ import {
 } from './CommentsList.styled';
 
 function CommentsList({ article_id }) {
-  const [commentsList, setCommentsList] = useState([]);
-  const {loading, setLoading, error, setError} = useContext(AppContext)
+  const {loading, setLoading, error, setError, commentsList, setCommentsList} = useContext(AppContext)
 
   useEffect(() => {
      fetchComments(article_id)
