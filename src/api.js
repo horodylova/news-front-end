@@ -5,13 +5,23 @@ const api = axios.create({
   });
   
   export const fetchArticles = (params = {}) => {
+    const validQueries = ['sort_by', 'order', 'topic', 'author', 'title', 'article_id', 'created_at', 'votes', 'article_img_url', 'comment_count'];
+  
+    const filteredParams = Object.keys(params)
+      .filter(key => validQueries.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = params[key];
+        return obj;
+      }, {});
+  
     return api
-      .get("/articles", { params })
+      .get("/articles", { params: filteredParams })
       .then(({ data }) => data)
       .catch(error => {
         throw new Error(`Error fetching articles: ${error.response?.data?.message || error.message}`);
       });
   };
+  
 
   export const fetchSingleArticle = (article_id) => {
     return api

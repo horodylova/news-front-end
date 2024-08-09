@@ -5,6 +5,7 @@ import { AppContext } from "../../contexts/AppContext";
 import { fetchArticles } from "../../api";
 import ArticleCard from "../../Components/ArticleCard/ArticleCard";
 import Loader from "../../Components/Loader/Loader";
+import SortOptions from "../../Components/SortOptions/SortOptions"
 
 import {
   PageContainer,
@@ -17,11 +18,13 @@ import {
 function ArticlesPage() {
   
   const [articles, setArticles] = useState([]);
+  const [sortBy, setSortBy] = useState([])
+  const [order, setOrder] = useState("desc")
   const { loading, setLoading, error, setError } = useContext(AppContext);
 
   useEffect(() => {
     setLoading(true);
-    fetchArticles()
+    fetchArticles({ sort_by: sortBy, order })
       .then((data) => {
         setArticles(data.articles);
         setLoading(false);
@@ -31,7 +34,7 @@ function ArticlesPage() {
         setLoading(false);
         toast.error(`Error: ${err.message}`);
       });
-  }, []);
+  }, [sortBy, order]);
 
   if (loading) return <Loader />;
   if (error) return null;
@@ -39,6 +42,12 @@ function ArticlesPage() {
   return (
     <PageContainer>
       <PageTitle>Articles</PageTitle>
+      <SortOptions
+       sortBy={sortBy}
+       setSortBy={setSortBy}
+       order={order}
+       setOrder={setOrder}
+      />
       <ArticleList>
         {articles.map((article) => (
           <ArticleItem key={article.article_id}>
