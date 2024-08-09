@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { fetchArticlesByTopic } from '../../api'; 
+import { toast } from 'react-toastify'; 
 import ArticleCard from '../ArticleCard/ArticleCard';
+import { AppContext } from '../../contexts/AppContext';
 import {ArticleItem, ArticleList} from "../../pages/ArticlesPage/ArticlesPage.styled"
 
 
 const ArticlesList = ({ selectedTopic }) => {
+  const {loading, setLoading} = useContext(AppContext)
 
     const [articles, setArticles] = useState([]);
-    console.log(selectedTopic, 'at articlelist');
-  
+   
     useEffect(() => {
+      setLoading(true)
         fetchArticlesByTopic(selectedTopic)
           .then((response) => {
             setArticles(response.articles)})
+            setLoading(false)
           .catch((error) => {
-            console.error('Failed to fetch articles:', error);
+            setLoading(false)
+            toast.error(`Failed to fetch articles: ${error.message}`);
           });
     }, [selectedTopic]);
-  
+    
+    if (loading) return <Loader />;
+
     if (!selectedTopic) {
       return <p>Please select a topic to see the articles.</p>;
     }

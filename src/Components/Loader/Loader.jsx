@@ -7,7 +7,7 @@ const Loader = () => {
       <Oval
         height={100}
         width={100}
-        color="var(--primary-color)"
+        color="#00BFFF"
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
