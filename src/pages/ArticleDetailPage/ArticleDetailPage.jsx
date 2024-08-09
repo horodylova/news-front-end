@@ -45,7 +45,6 @@ function ArticleDetailPage() {
   if (loading) return <Loader />;
   if (error) return null;
   if (!article) {
-    toast.error('No article found');
     return null;
   } 
 
