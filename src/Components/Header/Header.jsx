@@ -28,6 +28,9 @@ function Header() {
       <NavContainer>
         <NavList>
           <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
             <Link to="/articles">All Articles</Link>
           </li>
           <li>

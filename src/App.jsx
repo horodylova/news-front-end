@@ -6,6 +6,7 @@ import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ArticlesPage from "./pages/ArticlesPage/ArticlesPage";
 import ArticleDetailPage from "./pages/ArticleDetailPage/ArticleDetailPage";
+import TopicsPage from "./pages/TopicsPage/TopicsPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/articles/:article_id" element={<ArticleDetailPage />} />
+          <Route path="/topics" element={<TopicsPage />} />
         </Routes>
       </main>
       <Footer />

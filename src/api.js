@@ -36,7 +36,7 @@ const api = axios.create({
     .delete(`/comments/${comment_id}`)
     .then(({data}) => data)
     .catch((error) => {
-      throw new Error(`Error fetching comments: ${error.response?.data?.message || error.message}`);
+      throw new Error(`Error deleting comments: ${error.response?.data?.message || error.message}`);
     });
   }
 
@@ -67,3 +67,24 @@ const api = axios.create({
       });
 };
  
+
+export const fetchTopics = () => {
+  return api 
+  .get("/topics")
+  .then (({data}) => data)
+  .catch(error => {
+    console.log(comment.author);
+      throw new Error(`Failed to get topics: ${error.message}`);
+     
+  });
+}
+
+export const fetchArticlesByTopic = (topic) => {
+  return api
+  .get(`/articles?topic=${topic}`)
+   .then(({ data }) => data)
+    .catch(error => {
+      console.error('Error fetching articles:', error);
+      throw new Error(`Failed to get articles on the topic: ${error.message}`);
+    });
+}
