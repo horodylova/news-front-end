@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { AppContext } from "../../contexts/AppContext";
 import { fetchArticles } from "../../api";
 import ArticleCard from "../../Components/ArticleCard/ArticleCard";

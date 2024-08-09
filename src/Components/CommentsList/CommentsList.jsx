@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchComments } from "../../api";
 import { AppContext } from "../../contexts/AppContext";
-import Loader from "../Loader/Loader";
 import DeleteCommentComponent from "../DeleteCommentComponent/DeleteCommentComponent.jsx";
 import {
   CommentsContainer,
@@ -15,8 +14,7 @@ import {
 
 function CommentsList({ article_id }) {
   const {
-    loading,
-    setLoading,
+  
     error,
     setError,
     commentsList,
@@ -26,19 +24,20 @@ function CommentsList({ article_id }) {
   } = useContext(AppContext);
 
   useEffect(() => {
+     
     fetchComments(article_id)
       .then((data) => {
         setCommentsList(data.comments);
-        setLoading(false);
+        
       })
       .catch((err) => {
         setError(err);
-        setLoading(false);
+        
         toast.error(`Error: ${err.message}`);
       });
   }, [article_id]);
 
-  if (loading) return <Loader />;
+  
   if (error) return null;
 
   return (

@@ -27,6 +27,7 @@ function ArticleDetailPage() {
 
   useEffect(() => {
     const fetchArticle = async () => {
+      setLoading(true)
       try {
         const data = await fetchSingleArticle(article_id);
         setArticle(data.article);

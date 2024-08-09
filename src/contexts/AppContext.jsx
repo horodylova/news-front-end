@@ -4,7 +4,7 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState([]); 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [commentsList, setCommentsList] = useState([]);

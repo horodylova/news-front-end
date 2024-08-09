@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TopicLink } from './TopicsList.styled';
 import { fetchTopics } from "../../api";
+import { AppContext } from '../../contexts/AppContext';
+import Loader from '../Loader/Loader'
 
 const TopicsList = ({ topics, setTopics, selectedTopic, setSelectedTopic }) => {
-  useEffect(() => {
+  
+  const {loading, setLoading } = useContext(AppContext)
+  useEffect(() => { 
+    setLoading(true);
     fetchTopics()
       .then((response) => {
         setTopics(response.topics);
+        setLoading(false);
       })
       .catch(error => {
-        console.error("Failed to fetch topics:", error);
+        setLoading(false);
       });
   }, [setTopics]);
 
@@ -17,6 +23,7 @@ const TopicsList = ({ topics, setTopics, selectedTopic, setSelectedTopic }) => {
     setSelectedTopic(topicSlug); 
     console.log(selectedTopic, 'at the topicslist');
   }
+  if (loading) return <Loader />;
 
   return (
     <>

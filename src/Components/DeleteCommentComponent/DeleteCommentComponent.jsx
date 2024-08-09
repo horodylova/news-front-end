@@ -1,5 +1,6 @@
 import React , {useContext} from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { toast } from 'react-toastify';
 import { deleteComment } from "../../api";
 import DeleteIcon from "../../public/icons/garbage-bin.svg";
 
@@ -13,10 +14,10 @@ function DeleteCommentComponent({ comment_id, commentAuthor, currentUser }) {
             (comment) => comment.comment_id !== comment_id
           );
         });
-        console.log(`Comment ${comment_id} deleted successfully`);
+        toast.success(`Comment ${comment_id} deleted successfully`);
       })
       .catch((error) => {
-        console.error(`Error deleting comment: ${error.message}`);
+        toast.error(`Error deleting comment: ${error.message}`); 
       });
   }
   if (currentUser !== commentAuthor) {
