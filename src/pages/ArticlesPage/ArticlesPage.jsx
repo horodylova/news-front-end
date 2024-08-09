@@ -15,6 +15,7 @@ import {
 } from "./ArticlesPage.styled";
 
 function ArticlesPage() {
+  
   const [articles, setArticles] = useState([]);
   const { loading, setLoading, error, setError } = useContext(AppContext);
 
