@@ -31,6 +31,15 @@ const api = axios.create({
       });
   };
 
+  export const deleteComment = (comment_id) => {
+    return api
+    .delete(`/comments/${comment_id}`)
+    .then(({data}) => data)
+    .catch((error) => {
+      throw new Error(`Error fetching comments: ${error.response?.data?.message || error.message}`);
+    });
+  }
+
   export const patchArticleByVote = async (article_id, inc_votes) => {
     const response = await api.patch(`/articles/${article_id}`, { inc_votes });
     return response.data;
