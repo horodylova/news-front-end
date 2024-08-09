@@ -21,7 +21,8 @@ function CommentsList({ article_id }) {
     setError,
     commentsList,
     setCommentsList,
-    isLogin
+    isLogin, 
+    user
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -52,7 +53,11 @@ function CommentsList({ article_id }) {
               {new Date(comment.created_at).toLocaleDateString()}
             </CommentDate>
             {isLogin ? (
-              <DeleteCommentComponent comment_id={comment.comment_id} />
+              <DeleteCommentComponent 
+              comment_id={comment.comment_id}
+              commentAuthor={comment.author} 
+              currentUser={user.username} 
+              />
             ) : null}
           </CommentItem>
         ))}
