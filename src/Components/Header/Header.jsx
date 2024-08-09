@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <Heading>Summer News</Heading>
+      <Heading><Link to='/'>Summer News</Link></Heading>
       <ButtonContainer>
         {!isLogin && (
           <RegisterButton to="/login">
