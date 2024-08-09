@@ -8,7 +8,7 @@ function SortOptions({ sortBy, setSortBy, order, setOrder }) {
       <SortSelect
         id="sort-by"
         value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
+        onChange={(event) => setSortBy(event.target.value)}
       >
         <option value="created_at">Date</option>
         <option value="comment_count">Comment Count</option>
@@ -19,7 +19,7 @@ function SortOptions({ sortBy, setSortBy, order, setOrder }) {
       <SortSelect
         id="order"
         value={order}
-        onChange={(e) => setOrder(e.target.value)}
+        onChange={(event) => setOrder(event.target.value)}
       >
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
@@ -29,3 +29,6 @@ function SortOptions({ sortBy, setSortBy, order, setOrder }) {
 }
 
 export default SortOptions;
+
+
+

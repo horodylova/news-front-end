@@ -17,7 +17,7 @@ import {
 function ArticlesPage() {
   
   const [articles, setArticles] = useState([]);
-  const [sortBy, setSortBy] = useState([])
+  const [sortBy, setSortBy] = useState("created_at")
   const [order, setOrder] = useState("desc")
   const { loading, setLoading, error, setError } = useContext(AppContext);
 
@@ -31,7 +31,7 @@ function ArticlesPage() {
       .catch((err) => {
         setError(err);
         setLoading(false);
-        toast.error(`Error: ${err.message}`);
+        toast.error(`Error: ${err.message}`);      
       });
   }, [sortBy, order]);
 
