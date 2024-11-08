@@ -71,7 +71,6 @@ const api = axios.create({
       .post(`https://news-api-1-jrxe.onrender.com/api/articles/${article_id}/comments`, comment)
       .then(({ data }) => data)
       .catch(error => {
-        console.log(comment.author);
           throw new Error(`Failed to post comment: ${error.message}`);
          
       });
@@ -83,7 +82,6 @@ export const fetchTopics = () => {
   .get("/topics")
   .then (({data}) => data)
   .catch(error => {
-    console.log(comment.author);
       throw new Error(`Failed to get topics: ${error.message}`);
      
   });
@@ -94,7 +92,6 @@ export const fetchArticlesByTopic = (topic) => {
   .get(`/articles?topic=${topic}`)
    .then(({ data }) => data)
     .catch(error => {
-      console.error('Error fetching articles:', error);
       throw new Error(`Failed to get articles on the topic: ${error.message}`);
     });
 }
